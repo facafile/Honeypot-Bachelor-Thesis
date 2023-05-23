@@ -1,0 +1,6 @@
+Zašto nam uopće treba vpn kad se on ponaša kao static nat u našem slučaju?
+postavio sam docker container koji mi runna na vpn cvor ali me zanima mogu li koristiti onaj gotovi image ili da napravim dockerfile od njega i onda customisiram?
+Je li mi dovoljno da samo stavim da VPN čvor bute default gateway na routeru kako bi osigurao da sav promet ide preko VPN cvora?
+Trebaju li mi vpn vjerodajnice ako ostavimo da mi se na vpn spaja bez autoritizacije i je li to ono što mi želimo pa nam on samo logira promet?
+Ako trebam raditi s vjerodajnicama kako mogu u nasoj topologiji mreže dati vjerodajnice čvoru koji oznacava vanjsku konekciju jer se bez toga ne moze spojiti na vpn u tom slucaju?
+Još jedna stvar koju bi trebao implementirati je da vpn čvor jedino odgovara na requestove koje je zaprimio i ne šalje nikakav drugi promet van. Imate li savjet koji bi mi bio najbolji pristup za implementirati to u imunesu?
