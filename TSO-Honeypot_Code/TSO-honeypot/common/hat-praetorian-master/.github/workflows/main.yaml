@@ -1,0 +1,31 @@
+name: main
+on:
+    push:
+        branches:
+            - master
+env:
+    DOIT_NUM_PROCESS: 0
+jobs:
+    dist:
+        runs-on: ubuntu-latest
+        steps:
+          - name: checkout repository
+            uses: actions/checkout@v2
+          - name: install python
+            uses: actions/setup-python@v1
+            with:
+                python-version: 3.8
+          - name: install requirements
+            run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements.pip.dev.txt
+          - name: doit dist
+            run: doit dist
+          - name: upload
+            env:
+                SSH_KEY: ${{ secrets.CONTABO_RTDIST_KEY }}
+            run: |
+                echo -e "$SSH_KEY" > key.pem
+                chmod 600 key.pem
+                scp -P 22 -o StrictHostKeyChecking=no -i key.pem \
+                    build/dist/*.tar.gz rtdist@185.252.233.141:/var/www/dist/praetorian

@@ -1,0 +1,12 @@
+---
+syslog:
+    ui_port: 23030
+    server_port: 6515
+orchestrator:
+    ui_port: 23031
+remote_port: 2404
+commands:
+    - asdu_address: 1
+      io_address: 2
+      period: 60
+...

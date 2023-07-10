@@ -1,0 +1,82 @@
+---
+iec104_slave_port: 2404
+points:
+  - name: E01_Q1
+    type: M_DP_TA  # busbar disconnector
+    asdu: 10
+    ioa: 100
+  - name: E01_Q0
+    type: M_DP_TA  # breaker
+    asdu: 10
+    ioa: 101
+  - name: E01_Q9
+    type: M_DP_TA  # line disconnector
+    asdu: 10
+    ioa: 102
+  - name: E01_Q8
+    type: M_DP_TA  # ground disconnector
+    asdu: 10
+    ioa: 103
+  - name: E01_I
+    type: M_ME_NC  # current
+    asdu: 10
+    ioa: 200
+  - name: E01_P
+    type: M_ME_NC  # active power
+    asdu: 10
+    ioa: 201
+  - name: E01_CMD_Q0
+    type: C_DC_NA  # command circuit breaker
+    asdu: 10
+    ioa: 300
+default_state: state1
+states:
+  - name: state1
+    points:
+      - name: E01_Q1
+        type: constant
+        value: 'ON'
+      - name: E01_Q0
+        type: constant
+        value: 'ON'
+      - name: E01_Q9
+        type: constant
+        value: 'ON'
+      - name: E01_Q8
+        type: constant
+        value: 'OFF'
+      - name: E01_Q0
+        type: constant
+        value: 'ON'
+      - name: E01_I
+        type: random_numeric
+        num_decimals: 1
+        interval: [4, 6]
+        refresh_period: 1
+      - name: E01_P
+        type: random_numeric
+        num_decimals: 2
+        interval: [9, 10]
+        refresh_period: 1
+    trigger_conditions:
+      - point_name: E01_CMD_Q0
+        value: 'ON'
+  - name: state2
+    points:
+      - name: E01_Q0
+        type: constant
+        value: 'OFF'  # circuit breaker open!
+      - name: E01_I
+        type: constant
+        value: 0
+      - name: E01_P
+        type: constant
+        value: 0
+      - name: E01_Q1
+        type: random_string
+        interval: ['ON', 'OFF']
+        refresh_period: 1
+    trigger_conditions:
+      - point_name: E01_CMD_Q0
+        value: 'OFF'
+...

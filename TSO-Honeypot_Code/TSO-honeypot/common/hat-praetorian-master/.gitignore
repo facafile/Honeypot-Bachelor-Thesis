@@ -1,0 +1,10 @@
+/.db
+/.doit.db
+/build
+/cache
+/rtdist.key
+/src_py/**/json_schema_repo.json
+/src_py/hat/praetorian/__init__.py
+__pycache__
+yarn.lock
+node_modules/

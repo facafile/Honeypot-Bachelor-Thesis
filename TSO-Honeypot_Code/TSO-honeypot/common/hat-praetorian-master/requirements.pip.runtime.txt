@@ -1,0 +1,8 @@
+click == 8.0.4
+
+hat-aio == 0.6.1
+hat-drivers == 0.5.13
+hat-json == 0.5.6
+hat-orchestrator == 0.5.4
+hat-syslog == 0.5.6
+hat-util == 0.5.6
